@@ -19,8 +19,8 @@ let musicas = [];
 let atual = 0;
 const player = document.getElementById("player");
 
-// Carrega lista do JSON
-fetch("musicas.json")
+// Carrega lista do servidor (rota /musicas)
+fetch("/musicas")
     .then(res => res.json())
     .then(lista => {
         // encode resolve espaços e caracteres especiais
@@ -28,7 +28,8 @@ fetch("musicas.json")
         tocar(0);
     })
     .catch(err => {
-        console.error("Erro ao carregar JSON:", err);
+        console.error("Erro ao carregar músicas:", err);
+        document.body.innerHTML += "<p style='color:red;'>❌ Erro ao carregar músicas. Certifique-se de que o servidor está rodando (node server.js)</p>";
     });
 
 function tocar(i) {
