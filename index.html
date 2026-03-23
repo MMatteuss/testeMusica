@@ -4,9 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
   <title>🎵 SongStream · Player estilo Spotify</title>
-  <!-- Font Awesome 6 (gratuito) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <!-- Google Fonts para um visual moderno -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
   <style>
     * {
@@ -26,7 +24,6 @@
       padding: 1.5rem;
     }
 
-    /* container principal estilo Spotify */
     .player-container {
       max-width: 1400px;
       width: 100%;
@@ -35,10 +32,8 @@
       border-radius: 2rem;
       box-shadow: 0 25px 45px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.05);
       overflow: hidden;
-      transition: all 0.2s ease;
     }
 
-    /* cabeçalho */
     .header {
       padding: 1.5rem 2rem;
       background: rgba(0, 0, 0, 0.3);
@@ -59,13 +54,11 @@
     .logo-area i {
       font-size: 2rem;
       color: #1db954;
-      filter: drop-shadow(0 2px 6px rgba(29,185,84,0.3));
     }
 
     .logo-area h1 {
       font-size: 1.5rem;
       font-weight: 700;
-      letter-spacing: -0.3px;
       background: linear-gradient(135deg, #ffffff, #b3b3b3);
       -webkit-background-clip: text;
       background-clip: text;
@@ -92,8 +85,6 @@
       gap: 10px;
       cursor: pointer;
       transition: all 0.2s ease;
-      font-family: inherit;
-      backdrop-filter: blur(4px);
     }
 
     .folder-btn:hover {
@@ -102,7 +93,6 @@
     }
 
     .folder-btn i {
-      font-size: 1rem;
       color: #1db954;
     }
 
@@ -115,7 +105,6 @@
       color: #ccc;
     }
 
-    /* grid principal: playlist + player */
     .main-grid {
       display: grid;
       grid-template-columns: 1fr 1.2fr;
@@ -123,11 +112,10 @@
       min-height: 550px;
     }
 
-    /* playlist lateral */
     .playlist-section {
       background: rgba(10, 10, 14, 0.6);
       border-right: 1px solid rgba(255, 255, 255, 0.05);
-      padding: 1.2rem 0 1.2rem 0;
+      padding: 1.2rem 0;
       display: flex;
       flex-direction: column;
       overflow: hidden;
@@ -138,7 +126,6 @@
       display: flex;
       justify-content: space-between;
       align-items: baseline;
-      flex-wrap: wrap;
     }
 
     .playlist-header h3 {
@@ -166,11 +153,6 @@
       gap: 8px;
     }
 
-    .search-box i {
-      color: #aaa;
-      font-size: 0.9rem;
-    }
-
     .search-box input {
       background: transparent;
       border: none;
@@ -178,18 +160,12 @@
       color: white;
       width: 100%;
       font-size: 0.85rem;
-      font-family: inherit;
-    }
-
-    .search-box input::placeholder {
-      color: #6a6a72;
     }
 
     .playlist-scroll {
       flex: 1;
       overflow-y: auto;
       padding: 0 0.5rem 0.5rem 0;
-      scrollbar-width: thin;
     }
 
     .playlist-item {
@@ -200,8 +176,7 @@
       margin: 2px 8px;
       border-radius: 12px;
       cursor: pointer;
-      transition: all 0.15s;
-      background: transparent;
+      transition: 0.15s;
     }
 
     .playlist-item:hover {
@@ -211,16 +186,6 @@
     .playlist-item.active {
       background: rgba(29, 185, 84, 0.2);
       border-left: 3px solid #1db954;
-    }
-
-    .track-icon {
-      width: 36px;
-      text-align: center;
-      color: #b3b3b3;
-    }
-
-    .track-info {
-      flex: 1;
     }
 
     .track-name {
@@ -236,7 +201,6 @@
       color: #aaa;
     }
 
-    /* área do player principal */
     .player-area {
       padding: 2rem 2rem 1.8rem;
       display: flex;
@@ -258,13 +222,12 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 20px 30px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255,255,255,0.05);
+      box-shadow: 0 20px 30px rgba(0, 0, 0, 0.4);
     }
 
     .art-circle i {
       font-size: 5rem;
       color: #1db954;
-      opacity: 0.8;
     }
 
     .track-details {
@@ -281,53 +244,12 @@
       text-overflow: ellipsis;
     }
 
-    .current-artist {
-      color: #b0b0b0;
-      font-size: 0.85rem;
-      letter-spacing: 0.3px;
-    }
-
-    .progress-area {
-      margin: 0.5rem 0 1rem;
-    }
-
-    .time-slider {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-size: 0.7rem;
-      color: #bbb;
-    }
-
-    input[type="range"] {
-      flex: 1;
-      height: 4px;
-      -webkit-appearance: none;
-      background: #3a3a44;
-      border-radius: 10px;
-      outline: none;
-    }
-
-    input[type="range"]:focus {
-      outline: none;
-    }
-
-    input[type="range"]::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      width: 12px;
-      height: 12px;
-      background: #1db954;
-      border-radius: 50%;
-      cursor: pointer;
-      box-shadow: 0 0 4px #1db954;
-    }
-
     .controls {
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 1.8rem;
-      margin: 1rem 0 1rem;
+      margin: 1rem 0;
     }
 
     .ctrl-btn {
@@ -336,7 +258,6 @@
       color: #e6e6e6;
       font-size: 1.3rem;
       cursor: pointer;
-      transition: 0.1s;
       width: 44px;
       height: 44px;
       border-radius: 50%;
@@ -347,7 +268,6 @@
 
     .ctrl-btn:hover {
       background: rgba(255, 255, 255, 0.1);
-      transform: scale(1.05);
     }
 
     .play-btn {
@@ -356,25 +276,14 @@
       font-size: 1.6rem;
       width: 56px;
       height: 56px;
-      box-shadow: 0 6px 12px rgba(29,185,84,0.3);
-    }
-
-    .play-btn:hover {
-      background: #1ed760;
-      transform: scale(1.03);
     }
 
     .volume-control {
       display: flex;
       align-items: center;
       gap: 12px;
-      margin-top: 8px;
       justify-content: center;
-    }
-
-    .volume-control i {
-      font-size: 1rem;
-      color: #ccc;
+      margin-top: 8px;
     }
 
     .volume-slider {
@@ -388,48 +297,34 @@
       color: #8a8a94;
     }
 
-    /* responsividade */
     @media (max-width: 800px) {
-      .main-grid {
-        grid-template-columns: 1fr;
-      }
-      .playlist-section {
-        border-right: none;
-        border-bottom: 1px solid rgba(255,255,255,0.05);
-        max-height: 280px;
-      }
-      .player-area {
-        padding: 1.5rem;
-      }
-      .current-title {
-        font-size: 1.2rem;
-        white-space: normal;
-      }
-      .art-circle {
-        width: 130px;
-        height: 130px;
-      }
+      .main-grid { grid-template-columns: 1fr; }
+      .playlist-section { border-right: none; max-height: 280px; }
+      .current-title { font-size: 1.2rem; white-space: normal; }
+      .art-circle { width: 130px; height: 130px; }
     }
 
-    ::-webkit-scrollbar {
-      width: 5px;
-    }
-    ::-webkit-scrollbar-track {
-      background: #1a1a22;
-    }
-    ::-webkit-scrollbar-thumb {
+    input[type="range"] {
+      flex: 1;
+      height: 4px;
+      -webkit-appearance: none;
       background: #3a3a44;
       border-radius: 10px;
     }
-    button {
-      background: none;
-      border: none;
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 12px;
+      height: 12px;
+      background: #1db954;
+      border-radius: 50%;
       cursor: pointer;
     }
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: #1a1a22; }
+    ::-webkit-scrollbar-thumb { background: #3a3a44; border-radius: 10px; }
   </style>
 </head>
 <body>
-
 <div class="player-container">
   <div class="header">
     <div class="logo-area">
@@ -441,13 +336,12 @@
         <i class="fas fa-folder-open"></i> Selecionar pasta <strong style="color:#1db954">“song”</strong>
       </button>
       <div class="info-badge" id="folderStatus">
-        <i class="fas fa-music"></i> Nenhuma pasta
+        <i class="fas fa-music"></i> Carregando...
       </div>
     </div>
   </div>
 
   <div class="main-grid">
-    <!-- Playlist lateral -->
     <div class="playlist-section">
       <div class="playlist-header">
         <h3><i class="fas fa-list-ul"></i> Playlist</h3>
@@ -459,12 +353,11 @@
       </div>
       <div class="playlist-scroll" id="playlistContainer">
         <div style="text-align: center; padding: 2rem; color: #aaa;">
-          <i class="fas fa-folder-music"></i><br>Selecione a pasta "song"
+          <i class="fas fa-folder-music"></i><br>Carregando pasta "song"...
         </div>
       </div>
     </div>
 
-    <!-- Painel principal do player -->
     <div class="player-area">
       <div class="album-art">
         <div class="art-circle">
@@ -473,23 +366,23 @@
       </div>
       <div class="track-details">
         <div class="current-title" id="currentTrackTitle">Nenhuma música</div>
-        <div class="current-artist" id="currentTrackArtist">📁 Selecione uma pasta</div>
+        <div class="current-artist" id="currentTrackArtist">🎵 Aguardando playlist</div>
       </div>
 
       <div class="progress-area">
-        <div class="time-slider">
+        <div class="time-slider" style="display: flex; gap: 12px; align-items: center;">
           <span id="currentTime">0:00</span>
-          <input type="range" id="progressSlider" value="0" step="1" min="0" max="100">
+          <input type="range" id="progressSlider" value="0" step="1" min="0" max="100" style="flex:1">
           <span id="duration">0:00</span>
         </div>
       </div>
 
       <div class="controls">
-        <button class="ctrl-btn" id="shuffleBtn" title="Aleatório"><i class="fas fa-random"></i></button>
+        <button class="ctrl-btn" id="shuffleBtn"><i class="fas fa-random"></i></button>
         <button class="ctrl-btn" id="prevBtn"><i class="fas fa-step-backward"></i></button>
         <button class="ctrl-btn play-btn" id="playPauseBtn"><i class="fas fa-play"></i></button>
         <button class="ctrl-btn" id="nextBtn"><i class="fas fa-step-forward"></i></button>
-        <button class="ctrl-btn" id="repeatBtn" title="Repetir"><i class="fas fa-redo-alt"></i></button>
+        <button class="ctrl-btn" id="repeatBtn"><i class="fas fa-redo-alt"></i></button>
       </div>
 
       <div class="volume-control">
@@ -498,14 +391,14 @@
         <i class="fas fa-volume-up"></i>
       </div>
       <div class="status-msg" id="statusMsg">
-        🎧 Clique em "Selecionar pasta song" e escolha sua pasta de músicas
+        🔍 Tentando carregar automaticamente a pasta "song"...
       </div>
     </div>
   </div>
 </div>
 
 <script>
-  // ------------------- DOM ELEMENTOS -------------------
+  // ------------------- ELEMENTOS DOM -------------------
   const folderInput = document.createElement('input');
   folderInput.type = 'file';
   folderInput.setAttribute('webkitdirectory', '');
@@ -532,19 +425,16 @@
   const volumeSlider = document.getElementById('volumeSlider');
   const statusMsgDiv = document.getElementById('statusMsg');
 
-  // ---------- VARIÁVEIS GLOBAIS ----------
-  let allTracks = [];         // { name, url, file, displayName }
+  // ---------- VARIÁVEIS ----------
+  let allTracks = [];           // { name, displayName, url }
   let currentTrackIndex = -1;
   let audio = new Audio();
   let isPlaying = false;
   let shuffleActive = false;
-  let repeatMode = 'off';     // 'off', 'all', 'one'
-  let originalTracksOrder = [];   // referência ordenada
-  let filteredTracks = [];         // exibição atual (filtro)
+  let repeatMode = 'off';       // 'off', 'all', 'one'
   let currentFilter = '';
-  let currentDisplayIndices = [];   // mapeia índice filtrado -> índice real allTracks
-
-  // evitar memory leaks
+  let filteredTracks = [];
+  let currentDisplayIndices = [];
   let currentBlobUrls = [];
 
   // ---------- FUNÇÕES AUXILIARES ----------
@@ -560,42 +450,62 @@
     currentBlobUrls = [];
   }
 
-  // limpar playlist e parar música
   function resetPlayer() {
     audio.pause();
     isPlaying = false;
     updatePlayButtonIcon();
-    if (audio.src) {
-      audio.src = '';
-    }
+    if (audio.src) audio.src = '';
     currentTrackIndex = -1;
     currentTrackTitle.innerText = 'Nenhuma música';
-    currentTrackArtist.innerText = '🎵 Escolha uma pasta song';
+    currentTrackArtist.innerText = '🎵 Escolha uma playlist';
     progressSlider.value = 0;
     currentTimeSpan.innerText = '0:00';
     durationSpan.innerText = '0:00';
   }
 
-  // renderiza a playlist baseada no filtro atual
+  function updatePlayButtonIcon() {
+    const icon = playPauseBtn.querySelector('i');
+    icon.className = isPlaying ? 'fas fa-pause' : 'fas fa-play';
+  }
+
+  function updateTrackInfoUI() {
+    if (currentTrackIndex >= 0 && allTracks[currentTrackIndex]) {
+      const track = allTracks[currentTrackIndex];
+      currentTrackTitle.innerText = track.displayName;
+      currentTrackArtist.innerText = `🎧 Arquivo local • ${track.name.split('.').pop().toUpperCase()}`;
+    } else {
+      currentTrackTitle.innerText = 'Nenhuma música';
+      currentTrackArtist.innerText = '📁 Selecione uma pasta';
+    }
+  }
+
+  function highlightActivePlaylist() {
+    document.querySelectorAll('.playlist-item').forEach(item => {
+      const url = item.getAttribute('data-track-url');
+      if (currentTrackIndex >= 0 && allTracks[currentTrackIndex]?.url === url) {
+        item.classList.add('active');
+      } else {
+        item.classList.remove('active');
+      }
+    });
+  }
+
   function renderPlaylist() {
     if (!allTracks.length) {
       playlistContainer.innerHTML = `<div style="text-align: center; padding: 2rem; color: #aaa;">
-        <i class="fas fa-folder-open"></i><br>Nenhuma música encontrada<br><span style="font-size:12px;">Selecione pasta com .mp3, .wav, .ogg, .m4a, .flac</span>
+        <i class="fas fa-folder-open"></i><br>Nenhuma música encontrada<br><span style="font-size:12px;">Clique em "Selecionar pasta song" ou verifique se os arquivos estão na pasta correta.</span>
       </div>`;
       trackCountSpan.innerText = `0 músicas`;
       return;
     }
 
-    // aplica filtro
     let filtered = allTracks;
     if (currentFilter.trim() !== '') {
       const term = currentFilter.trim().toLowerCase();
       filtered = allTracks.filter(track => track.displayName.toLowerCase().includes(term));
     }
     filteredTracks = filtered;
-    // mapear indices filtrados para original
     currentDisplayIndices = filteredTracks.map(track => allTracks.findIndex(t => t.url === track.url));
-
     trackCountSpan.innerText = `${filteredTracks.length} ${filteredTracks.length === 1 ? 'música' : 'músicas'}`;
 
     if (filteredTracks.length === 0) {
@@ -605,11 +515,10 @@
 
     let html = '';
     filteredTracks.forEach((track, idx) => {
-      const isActive = (currentTrackIndex !== -1 && allTracks[currentTrackIndex] && allTracks[currentTrackIndex].url === track.url);
+      const isActive = currentTrackIndex !== -1 && allTracks[currentTrackIndex]?.url === track.url;
       html += `
         <div class="playlist-item ${isActive ? 'active' : ''}" data-track-url="${track.url}" data-track-idx="${currentDisplayIndices[idx]}">
-          <div class="track-icon"><i class="fas fa-music"></i></div>
-          <div class="track-info">
+          <div class="track-info" style="flex:1">
             <div class="track-name">${escapeHtml(track.displayName)}</div>
             <div class="track-artist">Arquivo local</div>
           </div>
@@ -618,10 +527,8 @@
     });
     playlistContainer.innerHTML = html;
 
-    // adicionar eventos de clique nos itens
     document.querySelectorAll('.playlist-item').forEach(el => {
-      el.addEventListener('click', (e) => {
-        const trackUrl = el.getAttribute('data-track-url');
+      el.addEventListener('click', () => {
         const originalIdx = parseInt(el.getAttribute('data-track-idx'));
         if (!isNaN(originalIdx) && originalIdx >= 0 && originalIdx < allTracks.length) {
           playTrackByIndex(originalIdx);
@@ -630,7 +537,6 @@
     });
   }
 
-  // pequeno helper para escapar HTML
   function escapeHtml(str) {
     return str.replace(/[&<>]/g, function(m) {
       if (m === '&') return '&amp;';
@@ -640,18 +546,10 @@
     });
   }
 
-  // tocar uma música específica pelo índice no array allTracks
   function playTrackByIndex(index) {
     if (index < 0 || index >= allTracks.length) return;
-    if (currentTrackIndex === index && !audio.paused) {
-      // mesma música, só garantir pause/play? mas se clicar de novo não faz nada, mantém.
-      return;
-    }
     currentTrackIndex = index;
     const track = allTracks[currentTrackIndex];
-    if (!track) return;
-
-    // Mudar src
     audio.src = track.url;
     audio.load();
     audio.play().then(() => {
@@ -660,278 +558,199 @@
       updateTrackInfoUI();
       highlightActivePlaylist();
     }).catch(err => {
-      console.warn("Erro ao reproduzir:", err);
       statusMsgDiv.innerText = "⚠️ Erro ao reproduzir. Formato pode não ser suportado.";
       isPlaying = false;
       updatePlayButtonIcon();
     });
-
-    // atualizar interface
     updateTrackInfoUI();
     highlightActivePlaylist();
-    // eventos do audio serão atualizados nos listeners globais
   }
 
-  function updateTrackInfoUI() {
-    if (currentTrackIndex >= 0 && allTracks[currentTrackIndex]) {
-      const track = allTracks[currentTrackIndex];
-      currentTrackTitle.innerText = track.displayName;
-      currentTrackArtist.innerText = `🎧 Na playlist • ${track.displayName.split('.').pop().toUpperCase()}`;
-    } else {
-      currentTrackTitle.innerText = 'Nenhuma música';
-      currentTrackArtist.innerText = '📁 Selecione uma pasta';
-    }
-  }
-
-  function highlightActivePlaylist() {
-    const items = document.querySelectorAll('.playlist-item');
-    items.forEach(item => {
-      const url = item.getAttribute('data-track-url');
-      if (currentTrackIndex >= 0 && allTracks[currentTrackIndex] && allTracks[currentTrackIndex].url === url) {
-        item.classList.add('active');
-      } else {
-        item.classList.remove('active');
-      }
-    });
-  }
-
-  function updatePlayButtonIcon() {
-    const icon = playPauseBtn.querySelector('i');
-    if (isPlaying) {
-      icon.className = 'fas fa-pause';
-    } else {
-      icon.className = 'fas fa-play';
-    }
-  }
-
-  // próximo / anterior com lógica de shuffle e repeat
   function playNext() {
-    if (allTracks.length === 0) return;
+    if (!allTracks.length) return;
     if (repeatMode === 'one' && currentTrackIndex !== -1) {
-      // repete a mesma
       playTrackByIndex(currentTrackIndex);
       return;
     }
-
     let nextIndex = -1;
-    if (shuffleActive && repeatMode !== 'all') {
-      // aleatório: escolhe um índice diferente do atual
+    if (shuffleActive) {
       let newIdx;
-      do {
-        newIdx = Math.floor(Math.random() * allTracks.length);
-      } while (allTracks.length > 1 && newIdx === currentTrackIndex);
+      do { newIdx = Math.floor(Math.random() * allTracks.length); }
+      while (allTracks.length > 1 && newIdx === currentTrackIndex);
       nextIndex = newIdx;
     } else {
-      // ordem normal (ou repeat all)
-      if (currentTrackIndex === -1) {
-        nextIndex = 0;
-      } else {
+      if (currentTrackIndex === -1) nextIndex = 0;
+      else {
         nextIndex = currentTrackIndex + 1;
         if (nextIndex >= allTracks.length) {
-          if (repeatMode === 'all') {
-            nextIndex = 0;
-          } else {
-            nextIndex = -1;
-          }
+          nextIndex = repeatMode === 'all' ? 0 : -1;
         }
       }
     }
-
-    if (nextIndex !== -1 && nextIndex < allTracks.length) {
-      playTrackByIndex(nextIndex);
-    } else if (nextIndex === -1) {
-      // acabou a playlist sem repeat
-      audio.pause();
-      isPlaying = false;
-      updatePlayButtonIcon();
-      statusMsgDiv.innerText = "🏁 Fim da playlist. Ative repetir para loop.";
-    }
+    if (nextIndex !== -1) playTrackByIndex(nextIndex);
+    else statusMsgDiv.innerText = "🏁 Fim da playlist. Ative repetir para loop.";
   }
 
   function playPrevious() {
-    if (allTracks.length === 0) return;
-    if (shuffleActive) {
-      // comportamento simples: volta para anterior na ordem original (não random)
-      if (currentTrackIndex - 1 >= 0) {
-        playTrackByIndex(currentTrackIndex - 1);
-      } else {
-        playTrackByIndex(allTracks.length - 1);
+    if (!allTracks.length) return;
+    let prev = currentTrackIndex - 1;
+    if (prev < 0) prev = allTracks.length - 1;
+    playTrackByIndex(prev);
+  }
+
+  // ---------- CARREGAMENTO AUTOMÁTICO DA PASTA "song" ----------
+  async function tryLoadSongsFromSongFolder() {
+    statusMsgDiv.innerText = "🔍 Verificando pasta 'song'...";
+    folderStatus.innerHTML = `<i class="fas fa-spinner fa-pulse"></i> Carregando...`;
+
+    try {
+      // Tenta fazer fetch da pasta (funciona em servidores com listagem de diretórios)
+      const response = await fetch('song/');
+      if (!response.ok) throw new Error('Não foi possível listar a pasta');
+      const text = await response.text();
+      
+      // Extrai nomes de arquivos de áudio do HTML de listagem
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(text, 'text/html');
+      const links = doc.querySelectorAll('a');
+      const audioExtensions = ['mp3', 'wav', 'ogg', 'm4a', 'flac', 'aac'];
+      const files = [];
+      
+      for (let link of links) {
+        let href = link.getAttribute('href');
+        if (href && !href.endsWith('/') && !href.startsWith('?')) {
+          const ext = href.split('.').pop().toLowerCase();
+          if (audioExtensions.includes(ext)) {
+            files.push(href);
+          }
+        }
       }
-    } else {
-      let prev = currentTrackIndex - 1;
-      if (prev < 0) prev = allTracks.length - 1;
-      playTrackByIndex(prev);
+      
+      if (files.length === 0) throw new Error('Nenhum arquivo de áudio encontrado na pasta "song"');
+      
+      // Constrói URLs para cada arquivo
+      const trackList = [];
+      for (let fileName of files) {
+        const url = `song/${encodeURIComponent(fileName)}`;
+        let displayName = fileName.replace(/\.(mp3|wav|ogg|m4a|flac|aac)$/i, '');
+        displayName = displayName.replace(/_spotdown\.org/g, ''); // limpa sufixo
+        trackList.push({
+          name: fileName,
+          displayName: displayName,
+          url: url
+        });
+      }
+      
+      // Substitui lista atual
+      resetPlayer();
+      revokeAllUrls();
+      allTracks = trackList;
+      currentBlobUrls = []; // não são blobs, são URLs relativas
+      folderStatus.innerHTML = `<i class="fas fa-check-circle"></i> ${allTracks.length} músicas carregadas`;
+      statusMsgDiv.innerHTML = `✅ Playlist carregada da pasta "song"! ${allTracks.length} músicas.`;
+      renderPlaylist();
+      if (allTracks.length) playTrackByIndex(0);
+      
+    } catch (error) {
+      console.warn("Falha ao carregar automaticamente:", error);
+      folderStatus.innerHTML = `<i class="fas fa-folder-open"></i> Selecione a pasta "song"`;
+      statusMsgDiv.innerHTML = `📂 Não foi possível listar a pasta "song" automaticamente. Clique no botão acima e selecione a pasta "song" manualmente.`;
+      playlistContainer.innerHTML = `<div style="text-align: center; padding: 2rem; color: #aaa;">
+        <i class="fas fa-folder-music"></i><br>Clique em "Selecionar pasta song"<br>e escolha a pasta com suas músicas.
+      </div>`;
     }
   }
 
-  // Carregar pasta (webkitdirectory)
+  // ---------- SELEÇÃO MANUAL (webkitdirectory) ----------
   function loadSongsFromFolder(files) {
     const audioExtensions = ['mp3', 'wav', 'ogg', 'm4a', 'flac', 'aac', 'webm'];
-    const audioFiles = [];
-    for (const file of files) {
+    const audioFiles = Array.from(files).filter(file => {
       const ext = file.name.split('.').pop().toLowerCase();
-      if (audioExtensions.includes(ext) || file.type.startsWith('audio/')) {
-        audioFiles.push(file);
-      }
-    }
+      return audioExtensions.includes(ext) || file.type.startsWith('audio/');
+    });
+    
     if (audioFiles.length === 0) {
-      statusMsgDiv.innerText = "❌ Nenhum arquivo de áudio encontrado na pasta. Use MP3, WAV, OGG etc.";
+      statusMsgDiv.innerText = "❌ Nenhum arquivo de áudio encontrado.";
       folderStatus.innerHTML = `<i class="fas fa-exclamation-triangle"></i> Sem músicas`;
-      return false;
+      return;
     }
-
-    // reset anterior
+    
     resetPlayer();
     revokeAllUrls();
     allTracks = [];
     currentBlobUrls = [];
-
+    
     audioFiles.sort((a,b) => a.name.localeCompare(b.name));
     for (const file of audioFiles) {
       const url = URL.createObjectURL(file);
       currentBlobUrls.push(url);
-      let displayName = file.name.replace(/\.[^/.]+$/, ""); // remove extensão
+      let displayName = file.name.replace(/\.[^/.]+$/, "");
+      displayName = displayName.replace(/_spotdown\.org/g, '');
       if (displayName.length > 45) displayName = displayName.substring(0,42)+"...";
       allTracks.push({
         name: file.name,
         displayName: displayName,
         url: url,
-        file: file,
       });
     }
-
-    originalTracksOrder = [...allTracks];
+    
     folderStatus.innerHTML = `<i class="fas fa-check-circle"></i> ${allTracks.length} músicas carregadas`;
-    statusMsgDiv.innerHTML = `🎵 ${allTracks.length} músicas prontas. Clique em alguma para tocar!`;
-    currentFilter = '';
-    searchInput.value = '';
+    statusMsgDiv.innerHTML = `🎵 ${allTracks.length} músicas prontas!`;
     renderPlaylist();
-
-    if (allTracks.length > 0) {
-      // tocar primeira automaticamente? opcional mas agradável
-      playTrackByIndex(0);
-    }
-    return true;
+    if (allTracks.length) playTrackByIndex(0);
   }
 
-  // EVENTOS DE ÁUDIO
+  // ---------- EVENTOS ----------
   function setupAudioEvents() {
     audio.addEventListener('timeupdate', () => {
       if (audio.duration && !isNaN(audio.duration)) {
-        const percent = (audio.currentTime / audio.duration) * 100;
-        progressSlider.value = percent;
+        progressSlider.value = (audio.currentTime / audio.duration) * 100;
         currentTimeSpan.innerText = formatTime(audio.currentTime);
         durationSpan.innerText = formatTime(audio.duration);
       }
     });
-    audio.addEventListener('loadedmetadata', () => {
-      durationSpan.innerText = formatTime(audio.duration);
-      progressSlider.max = 100;
-    });
-    audio.addEventListener('ended', () => {
-      if (repeatMode === 'one') {
-        playTrackByIndex(currentTrackIndex);
-      } else {
-        playNext();
-      }
-    });
-    audio.addEventListener('error', () => {
-      statusMsgDiv.innerText = "Erro no arquivo de áudio. Formato não suportado.";
-    });
+    audio.addEventListener('ended', () => playNext());
+    audio.addEventListener('error', () => statusMsgDiv.innerText = "Erro no arquivo de áudio.");
   }
-
-  // progresso manual
+  
   progressSlider.addEventListener('input', (e) => {
-    if (audio.duration && !isNaN(audio.duration)) {
-      audio.currentTime = (e.target.value / 100) * audio.duration;
-    }
+    if (audio.duration) audio.currentTime = (e.target.value / 100) * audio.duration;
   });
-
-  volumeSlider.addEventListener('input', (e) => {
-    audio.volume = e.target.value;
-  });
-
-  // controles
+  volumeSlider.addEventListener('input', (e) => audio.volume = e.target.value);
+  
   playPauseBtn.addEventListener('click', () => {
-    if (!allTracks.length) {
-      statusMsgDiv.innerText = "🎛️ Selecione uma pasta com músicas primeiro!";
-      return;
-    }
-    if (currentTrackIndex === -1 && allTracks.length) {
-      playTrackByIndex(0);
-      return;
-    }
-    if (isPlaying) {
-      audio.pause();
-      isPlaying = false;
-    } else {
-      audio.play().catch(e => console.log(e));
-      isPlaying = true;
-    }
+    if (!allTracks.length) { statusMsgDiv.innerText = "Selecione uma pasta com músicas primeiro!"; return; }
+    if (currentTrackIndex === -1 && allTracks.length) playTrackByIndex(0);
+    else if (isPlaying) { audio.pause(); isPlaying = false; }
+    else { audio.play().catch(console.warn); isPlaying = true; }
     updatePlayButtonIcon();
   });
-
-  nextBtn.addEventListener('click', () => {
-    if (!allTracks.length) return;
-    playNext();
-  });
-  prevBtn.addEventListener('click', () => {
-    if (!allTracks.length) return;
-    playPrevious();
-  });
-
+  nextBtn.addEventListener('click', () => allTracks.length && playNext());
+  prevBtn.addEventListener('click', () => allTracks.length && playPrevious());
   shuffleBtn.addEventListener('click', () => {
     shuffleActive = !shuffleActive;
     shuffleBtn.style.color = shuffleActive ? '#1db954' : '#e6e6e6';
-    statusMsgDiv.innerText = shuffleActive ? "🔀 Modo aleatório ativado" : "➡️ Modo sequencial";
+    statusMsgDiv.innerText = shuffleActive ? "🔀 Aleatório ativado" : "➡️ Modo sequencial";
   });
-
   repeatBtn.addEventListener('click', () => {
-    if (repeatMode === 'off') {
-      repeatMode = 'all';
-      repeatBtn.style.color = '#1db954';
-      repeatBtn.innerHTML = '<i class="fas fa-redo-alt"></i><span style="font-size:10px; margin-left:2px;">🔄</span>';
-      statusMsgDiv.innerText = "🔁 Repetir playlist ativado";
-    } else if (repeatMode === 'all') {
-      repeatMode = 'one';
-      repeatBtn.style.color = '#f5b042';
-      repeatBtn.innerHTML = '<i class="fas fa-repeat-1"></i>';
-      statusMsgDiv.innerText = "🔂 Repetir uma música";
-    } else {
-      repeatMode = 'off';
-      repeatBtn.style.color = '#e6e6e6';
-      repeatBtn.innerHTML = '<i class="fas fa-redo-alt"></i>';
-      statusMsgDiv.innerText = "Repetição desativada";
-    }
+    if (repeatMode === 'off') { repeatMode = 'all'; repeatBtn.style.color = '#1db954'; repeatBtn.innerHTML = '<i class="fas fa-redo-alt"></i>'; statusMsgDiv.innerText = "🔁 Repetir playlist"; }
+    else if (repeatMode === 'all') { repeatMode = 'one'; repeatBtn.style.color = '#f5b042'; repeatBtn.innerHTML = '<i class="fas fa-repeat-1"></i>'; statusMsgDiv.innerText = "🔂 Repetir uma música"; }
+    else { repeatMode = 'off'; repeatBtn.style.color = '#e6e6e6'; repeatBtn.innerHTML = '<i class="fas fa-redo-alt"></i>'; statusMsgDiv.innerText = "Repetição desativada"; }
   });
-
-  searchInput.addEventListener('input', (e) => {
-    currentFilter = e.target.value;
-    renderPlaylist();
-    highlightActivePlaylist();
-  });
-
-  selectFolderBtn.addEventListener('click', () => {
-    folderInput.click();
-  });
-
+  searchInput.addEventListener('input', (e) => { currentFilter = e.target.value; renderPlaylist(); highlightActivePlaylist(); });
+  selectFolderBtn.addEventListener('click', () => folderInput.click());
   folderInput.addEventListener('change', (event) => {
-    const files = Array.from(event.target.files);
-    if (files.length) {
-      loadSongsFromFolder(files);
-    } else {
-      folderStatus.innerHTML = `<i class="fas fa-folder"></i> Nenhum arquivo`;
-    }
-    folderInput.value = ''; // permite reselecionar mesma pasta
+    const files = event.target.files;
+    if (files.length) loadSongsFromFolder(files);
+    folderInput.value = '';
   });
-
-  // volume inicial
+  
   audio.volume = 0.8;
   volumeSlider.value = 0.8;
   setupAudioEvents();
-
-  // mensagem inicial
-  statusMsgDiv.innerHTML = "🎧 Selecione a pasta 'song' (ou qualquer pasta com músicas)";
+  
+  // Inicializa tentando carregar a pasta "song" automaticamente
+  tryLoadSongsFromSongFolder();
 </script>
 </body>
 </html>
