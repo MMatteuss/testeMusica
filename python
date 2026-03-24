@@ -1,0 +1,38 @@
+import os
+
+# Caminho da pasta com as músicas
+caminho = r"C:\Users\Yale\Documents\GitHub\testeMusica\musicas"
+
+# Verificar se a pasta existe
+if not os.path.exists(caminho):
+    print(f"Erro: O caminho '{caminho}' não existe!")
+else:
+    # Listar todos os arquivos na pasta
+    arquivos = os.listdir(caminho)
+    
+    # Contador para arquivos renomeados
+    contador = 0
+    
+    # Para cada arquivo na pasta
+    for arquivo in arquivos:
+        # Verificar se é um arquivo .mp3
+        if arquivo.endswith('.mp3'):
+            # Verificar se o nome contém '_spotdown.org'
+            if '_spotdown.org' in arquivo:
+                # Criar o novo nome (remover '_spotdown.org')
+                novo_nome = arquivo.replace('_spotdown.org', '')
+                
+                # Caminho completo dos arquivos
+                caminho_antigo = os.path.join(caminho, arquivo)
+                caminho_novo = os.path.join(caminho, novo_nome)
+                
+                # Verificar se o novo nome já existe
+                if not os.path.exists(caminho_novo):
+                    # Renomear o arquivo
+                    os.rename(caminho_antigo, caminho_novo)
+                    print(f"✓ Renomeado: {arquivo} -> {novo_nome}")
+                    contador += 1
+                else:
+                    print(f"✗ Erro: {novo_nome} já existe!")
+    
+    print(f"\nConcluído! {contador} arquivo(s) renomeado(s).")
